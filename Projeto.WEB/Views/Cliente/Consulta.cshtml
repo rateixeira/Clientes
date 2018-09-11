@@ -1,0 +1,67 @@
+﻿<!-- Declarando a classe de modelo -->
+@model List<Projeto.WEB.Models.ClienteConsultaModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>COTI Informática</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <div>
+        <h1>Consulta de Clientes</h1>
+        <a href="/Home/Index">Página Inicial</a>
+        <hr />
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Data Cadastro</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.IdCliente</td>
+                        <td>@c.Nome</td>
+                        <td>@c.Email</td>
+                        <td>@c.DataCadastro</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-sm">Atualizar</a>
+                            <a href="/Cliente/Exclusao?idCliente=@c.IdCliente"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirmarExclusao();">
+                                Excluir
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        Quantidade de clientes: @Model.Count
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- bloco de codigo javascript.. -->
+    <script type="text/javascript">
+        function confirmarExclusao() {
+            //janela popup de confirmação do navegador..
+            return window.confirm('Deseja excluir o cliente selecionado?');
+        }
+    </script>
+
+
+
+</body>
+</html>
